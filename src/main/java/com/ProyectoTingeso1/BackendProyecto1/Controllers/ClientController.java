@@ -1,0 +1,37 @@
+package com.ProyectoTingeso1.BackendProyecto1.Controllers;
+
+import com.ProyectoTingeso1.BackendProyecto1.Entities.Client;
+import com.ProyectoTingeso1.BackendProyecto1.Services.ClientService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/client")
+@CrossOrigin("*")
+public class ClientController {
+    @Autowired
+    private ClientService clientService;
+
+    @PostMapping("/save")
+    public ResponseEntity<Client> saveClient(@RequestBody Client client) {
+        Client clientNew = clientService.saveClient(client);
+        return ResponseEntity.ok(clientNew);
+    }
+    @GetMapping("/")
+    public ResponseEntity<List<Client>>  listClients() {
+        List<Client> clients = clientService.getClients();
+        return ResponseEntity.ok(clients);
+    }
+    @PutMapping("/update")
+    public ResponseEntity<Client> updateClient(@RequestBody Client client) {
+        return ResponseEntity.ok(clientService.updateClient(client));
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> deleteClient(@PathVariable Long id) throws Exception {
+        clientService.deleteClient(id);
+        return ResponseEntity.noContent().build();
+    }
+}
