@@ -1,5 +1,6 @@
 package com.ProyectoTingeso1.BackendProyecto1.Services;
 
+import com.ProyectoTingeso1.BackendProyecto1.DTOs.ToolDTO;
 import com.ProyectoTingeso1.BackendProyecto1.Entities.Tool;
 import com.ProyectoTingeso1.BackendProyecto1.Repositories.ToolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class ToolService {
             return false;
         }
     }
-    public List<Tool> getAllTools() {
-        return toolRepository.findAll();
+    public List<ToolDTO> getAllTools() {
+        return toolRepository.getToolSummary();
     }
 }

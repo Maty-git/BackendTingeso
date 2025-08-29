@@ -1,5 +1,6 @@
 package com.ProyectoTingeso1.BackendProyecto1.Controllers;
 
+import com.ProyectoTingeso1.BackendProyecto1.DTOs.ToolDTO;
 import com.ProyectoTingeso1.BackendProyecto1.Entities.Tool;
 import com.ProyectoTingeso1.BackendProyecto1.Services.ToolService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/tools")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin("*")
 public class ToolController {
     @Autowired
     private ToolService toolService;
@@ -22,7 +23,8 @@ public class ToolController {
     }
 
     @GetMapping("/all")
-    public List<Tool> getAllTools() {
-        return toolService.getAllTools();
+    public ResponseEntity<List<ToolDTO>> getAllTools() {
+        List<ToolDTO> response = toolService.getAllTools();
+        return ResponseEntity.ok(response);
     }
 }

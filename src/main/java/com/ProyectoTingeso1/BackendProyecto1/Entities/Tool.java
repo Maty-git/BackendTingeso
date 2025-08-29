@@ -21,6 +21,20 @@ public class Tool {
         UNDER_REPAIR,
         OUT_OF_SERVICE
     }
+    public enum ToolCategory {
+        MANUAL,
+        ELECTRICAL,
+        CONSTRUCTION,
+        CUTTING,
+        CARPENTRY,
+        WELDING,
+        GARDENING,
+        MEASUREMENT,
+        SCAFFOLDING,
+        MACHINERY,
+        SAFETY,
+        ACCESSORIES
+    }
     //atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,8 +42,9 @@ public class Tool {
     private Long id;
     @Column(nullable = false)
     private String name;
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String category;
+    private ToolCategory category;
     @Enumerated(EnumType.STRING)
     private ToolState state;
     private int quantity;
