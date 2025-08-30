@@ -25,6 +25,7 @@ public class User {
     @Column(unique = true, nullable = false)
     private Long id;
     private String name;
+    private String rut;
     private String email;
     private String password;
     @Enumerated(EnumType.STRING)

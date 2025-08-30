@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/client")
+@RequestMapping("/api/clients")
 @CrossOrigin("*")
 public class ClientController {
     @Autowired
@@ -20,7 +20,7 @@ public class ClientController {
         Client clientNew = clientService.saveClient(client);
         return ResponseEntity.ok(clientNew);
     }
-    @GetMapping("/")
+    @GetMapping("/all")
     public ResponseEntity<List<Client>>  listClients() {
         List<Client> clients = clientService.getClients();
         return ResponseEntity.ok(clients);

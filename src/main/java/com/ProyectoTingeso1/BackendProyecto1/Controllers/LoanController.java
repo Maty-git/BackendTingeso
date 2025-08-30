@@ -1,13 +1,23 @@
 package com.ProyectoTingeso1.BackendProyecto1.Controllers;
 
+import com.ProyectoTingeso1.BackendProyecto1.Entities.Loan;
+import com.ProyectoTingeso1.BackendProyecto1.Services.LoanService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/loan")
+@RequestMapping("/api/loans")
 @CrossOrigin("*")
 public class LoanController {
+    @Autowired
+    private LoanService loanService;
+
+    @PostMapping("/save")
+    public ResponseEntity<Loan> saveLoan(@RequestBody Loan loan) {
+        Loan  loanNew = loanService.saveLoan(loan);
+        return ResponseEntity.ok(loanNew);
+    }
 
 }
