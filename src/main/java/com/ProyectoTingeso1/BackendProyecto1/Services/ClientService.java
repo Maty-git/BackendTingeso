@@ -36,4 +36,8 @@ public class ClientService {
             throw new Exception(e.getMessage());
         }
     }
+
+    public Client getClientByRut(String rut) {
+        return clientRepository.findByRut(rut);
+    }
 }

@@ -27,4 +27,15 @@ public class ToolController {
         List<ToolDTO> response = toolService.getAllTools();
         return ResponseEntity.ok(response);
     }
+    @GetMapping("/tools")
+    public ResponseEntity<List<Tool>> getTools() {
+        List<Tool> tools = toolService.getTools();
+        return ResponseEntity.ok(tools);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTool(@PathVariable Long id) {
+        toolService.deleteToolById(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

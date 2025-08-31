@@ -14,4 +14,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public User getUserByRut(String rut){
+        return userRepository.findByRut(rut);
+    }
 }

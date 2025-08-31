@@ -1,5 +1,6 @@
 package com.ProyectoTingeso1.BackendProyecto1.Controllers;
 
+import com.ProyectoTingeso1.BackendProyecto1.DTOs.LoanRequestDTO;
 import com.ProyectoTingeso1.BackendProyecto1.Entities.Loan;
 import com.ProyectoTingeso1.BackendProyecto1.Services.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class LoanController {
     private LoanService loanService;
 
     @PostMapping("/save")
-    public ResponseEntity<Loan> saveLoan(@RequestBody Loan loan) {
+    public ResponseEntity<Loan> saveLoan(@RequestBody LoanRequestDTO loan) {
         Loan  loanNew = loanService.saveLoan(loan);
         return ResponseEntity.ok(loanNew);
     }

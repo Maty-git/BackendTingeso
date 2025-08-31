@@ -36,4 +36,15 @@ public class ToolService {
     public List<ToolDTO> getAllTools() {
         return toolRepository.getToolSummary();
     }
+
+    public List<Tool> getTools(){
+        return  toolRepository.findAll();
+    }
+
+    public Tool getToolById(Long id){
+        return toolRepository.findById(id).get();
+    }
+    public void deleteToolById(Long id){
+        toolRepository.deleteById(id);
+    }
 }
