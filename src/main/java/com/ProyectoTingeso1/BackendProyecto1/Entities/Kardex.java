@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Kardex {
     public enum MovementType {
+        Creation,
         LOAN,
         RETURN,
         CANCELLATION,

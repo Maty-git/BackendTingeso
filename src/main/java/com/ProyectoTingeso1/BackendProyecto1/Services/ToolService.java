@@ -1,6 +1,7 @@
 package com.ProyectoTingeso1.BackendProyecto1.Services;
 
 import com.ProyectoTingeso1.BackendProyecto1.DTOs.ToolDTO;
+import com.ProyectoTingeso1.BackendProyecto1.Entities.Kardex;
 import com.ProyectoTingeso1.BackendProyecto1.Entities.Tool;
 import com.ProyectoTingeso1.BackendProyecto1.Repositories.ToolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ public class ToolService {
         int i;
         for( i = 0; i < quantity; i++ ) {
             Tool newTool = new Tool();
+            Kardex k = new Kardex();
+
             newTool.setName(tool.getName());
             newTool.setCategory(tool.getCategory());
             newTool.setState(tool.getState());
@@ -25,9 +28,13 @@ public class ToolService {
             newTool.setRentDailyRate(tool.getRentDailyRate());
             newTool.setLateFee(tool.getLateFee());
             newTool.setReplacementValue(tool.getReplacementValue());
+
+            k.setTool(newTool);
+            //aqui falta codigo
             toolRepository.save(newTool);
         }
         if(i == quantity){
+
             return true;
         }else{
             return false;

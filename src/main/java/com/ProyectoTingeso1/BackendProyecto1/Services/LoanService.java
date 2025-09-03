@@ -9,6 +9,8 @@ import com.ProyectoTingeso1.BackendProyecto1.Repositories.LoanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class LoanService {
     @Autowired
@@ -36,4 +38,7 @@ public class LoanService {
         return loanRepository.save(newLoan);
     }
 
+    public List<Loan> getAllLoans() {
+        return loanRepository.findAll();
+    }
 }
