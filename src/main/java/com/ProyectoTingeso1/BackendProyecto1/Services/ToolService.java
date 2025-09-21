@@ -1,6 +1,7 @@
 package com.ProyectoTingeso1.BackendProyecto1.Services;
 
 import com.ProyectoTingeso1.BackendProyecto1.DTOs.ToolDTO;
+import com.ProyectoTingeso1.BackendProyecto1.DTOs.ToolDTOnoKardex;
 import com.ProyectoTingeso1.BackendProyecto1.Entities.Kardex;
 import com.ProyectoTingeso1.BackendProyecto1.Entities.Tool;
 import com.ProyectoTingeso1.BackendProyecto1.Repositories.ToolRepository;
@@ -13,14 +14,18 @@ import java.util.List;
 public class ToolService {
     @Autowired
     ToolRepository toolRepository;
-    
-    public boolean saveTool(Tool tool) {
-        int quantity =  tool.getQuantity();
-        int i;
-        for( i = 0; i < quantity; i++ ) {
-            Tool newTool = new Tool();
-            Kardex k = new Kardex();
 
+    @Autowired
+    KardexService kardexRepository;
+    @Autowired
+    private KardexService kardexService;
+
+    public boolean saveTool(Tool tool, String rutUser) {
+        int quantity = tool.getQuantity();
+        int i;
+
+        for (i = 0; i < quantity; i++) {
+            Tool newTool = new Tool();
             newTool.setName(tool.getName());
             newTool.setCategory(tool.getCategory());
             newTool.setState(tool.getState());
@@ -28,30 +33,50 @@ public class ToolService {
             newTool.setRentDailyRate(tool.getRentDailyRate());
             newTool.setLateFee(tool.getLateFee());
             newTool.setReplacementValue(tool.getReplacementValue());
+            newTool.setRepairCost(tool.getRepairCost());
 
-            k.setTool(newTool);
-            //aqui falta codigo
-            toolRepository.save(newTool);
-        }
-        if(i == quantity){
+            // Guardamos primero la herramienta
+            Tool savedTool = toolRepository.save(newTool);
 
-            return true;
-        }else{
-            return false;
+            // Ahora registramos el movimiento en el kardex
+            Kardex k = new Kardex();
+            k.setMovementType(Kardex.MovementType.CREATION); // CREACIÓN
+            k.setQuantity(1);
+            k.setUserRut(rutUser);
+            k.setTool(savedTool);
+
+            kardexService.saveKardex(k);
         }
+
+        return i == quantity;
     }
     public List<ToolDTO> getAllTools() {
         return toolRepository.getToolSummary();
     }
 
-    public List<Tool> getTools(){
-        return  toolRepository.findAll();
+    public List<ToolDTOnoKardex> getAllToolsNoKardex() {
+        return  toolRepository.getAllToolsNoKardex();
     }
 
     public Tool getToolById(Long id){
         return toolRepository.findById(id).get();
     }
-    public void deleteToolById(Long id){
-        toolRepository.deleteById(id);
+
+    public void deleteToolById(Long id, String rutUser) {
+        Tool tool = toolRepository.getById(id);
+        tool.setOutOfService(true);
+        tool.setState(Tool.ToolState.OUT_OF_SERVICE);
+        Kardex k = new Kardex();
+        k.setMovementType(Kardex.MovementType.CANCELLATION); // CREACIÓN
+        k.setQuantity(1);
+        k.setUserRut(rutUser);
+        k.setTool(tool);
+        kardexService.saveKardex(k);
+        toolRepository.save(tool);
+    }
+
+    public void setToolToLoaned (Long id) {
+        Tool tool = toolRepository.getById(id);
+        tool.setState(Tool.ToolState.LOANED);
     }
 }

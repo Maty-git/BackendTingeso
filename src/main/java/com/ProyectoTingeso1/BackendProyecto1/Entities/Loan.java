@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Entity
@@ -17,8 +18,7 @@ public class Loan {
     public enum LoanStatus {
         ACTIVE,
         RETURNED,
-        UNPAID_FINE,
-        REPLACEMENT
+        UNPAID_DEBT
     }
     //atributos
     @Id
@@ -44,17 +44,19 @@ public class Loan {
         this.deliveryDate = LocalDateTime.now();
     }
 
-    private int repairCost;
+    @Column(nullable = false)
+    private String userRut;
+
     //relaciones
     @ManyToOne(targetEntity =  Client.class)
     @JoinColumn(name = "client_id",  nullable = false)
     private Client client;
 
-    @ManyToOne(targetEntity = User.class)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
 
     @ManyToOne(targetEntity = Tool.class)
     @JoinColumn(name = "tool_id", nullable = false)
     private Tool tool;
+
+    @OneToMany(mappedBy = "loan", targetEntity = Debt.class, fetch = FetchType.LAZY)
+    private List<Debt> debts;
 }

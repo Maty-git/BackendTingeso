@@ -32,6 +32,8 @@ public class Client {
     private String email;
     private String status;
     //relaciones
-    @OneToMany(targetEntity = Loan.class, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "client",targetEntity = Loan.class, fetch = FetchType.LAZY)
     private List<Loan> loans;
+    @OneToMany(mappedBy = "client", targetEntity = Debt.class, fetch = FetchType.LAZY)
+    private List<Debt> debts;
 }

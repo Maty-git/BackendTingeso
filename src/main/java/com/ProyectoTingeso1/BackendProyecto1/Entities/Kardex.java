@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Kardex {
     public enum MovementType {
-        Creation,
+        CREATION,
         LOAN,
         RETURN,
         CANCELLATION,
@@ -36,11 +36,10 @@ public class Kardex {
         this.date = LocalDateTime.now();
     }
 
-    //relaciones
-    @ManyToOne(targetEntity = User.class)
-    @JoinColumn(name= "user_id", nullable = false)
-    private User user;
+    @JoinColumn(name = "user_rut", nullable = false)
+    private String userRut;
 
+    //relaciones
     @ManyToOne(targetEntity = Tool.class)
     @JoinColumn(name = "tool_id", nullable = false)
     private Tool tool;

@@ -1,6 +1,7 @@
 package com.ProyectoTingeso1.BackendProyecto1.Controllers;
 
 import com.ProyectoTingeso1.BackendProyecto1.DTOs.LoanRequestDTO;
+import com.ProyectoTingeso1.BackendProyecto1.DTOs.LoanReturnDTO;
 import com.ProyectoTingeso1.BackendProyecto1.Entities.Loan;
 import com.ProyectoTingeso1.BackendProyecto1.Services.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,8 @@ public class LoanController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Loan>> getAllLoan() {
-        List<Loan> loanList = loanService.getAllLoans();
+    public ResponseEntity<List<LoanReturnDTO>> getAllLoan() {
+        List<LoanReturnDTO> loanList = loanService.getAllLoans();
         return ResponseEntity.ok(loanList);
     }
 

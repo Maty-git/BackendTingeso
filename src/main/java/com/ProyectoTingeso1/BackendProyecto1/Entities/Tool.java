@@ -54,12 +54,14 @@ public class Tool {
     private int lateFee;     // tarifa diaria de multa por atraso
     @Column(nullable = false)
     private int replacementValue;  // valor de reposición
+    private int repairCost;
+    private boolean outOfService = false;
 
 
     //relaciones
-    @OneToMany(targetEntity =  Kardex.class,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "tool", targetEntity =  Kardex.class,fetch = FetchType.LAZY)
     private List<Kardex> kardexMovements = new ArrayList<>();
 
-    @OneToMany(targetEntity = Loan.class,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "tool", targetEntity = Loan.class,fetch = FetchType.LAZY)
     private List<Loan> loanMovement = new ArrayList<>();
 }

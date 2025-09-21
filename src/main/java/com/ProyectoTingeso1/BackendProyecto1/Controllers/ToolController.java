@@ -1,6 +1,7 @@
 package com.ProyectoTingeso1.BackendProyecto1.Controllers;
 
 import com.ProyectoTingeso1.BackendProyecto1.DTOs.ToolDTO;
+import com.ProyectoTingeso1.BackendProyecto1.DTOs.ToolDTOnoKardex;
 import com.ProyectoTingeso1.BackendProyecto1.Entities.Tool;
 import com.ProyectoTingeso1.BackendProyecto1.Services.ToolService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,9 @@ public class ToolController {
     @Autowired
     private ToolService toolService;
 
-    @PostMapping("/")
-    public ResponseEntity<Boolean> saveTool(@RequestBody Tool tool) {
-        boolean result = toolService.saveTool(tool);
+    @PostMapping("/{rutUser}")
+    public ResponseEntity<Boolean> saveTool(@RequestBody Tool tool, @PathVariable String rutUser) {
+        boolean result = toolService.saveTool(tool, rutUser);
         return ResponseEntity.ok(result);
     }
 
@@ -28,13 +29,13 @@ public class ToolController {
         return ResponseEntity.ok(response);
     }
     @GetMapping("/tools")
-    public ResponseEntity<List<Tool>> getTools() {
-        List<Tool> tools = toolService.getTools();
+    public ResponseEntity<List<ToolDTOnoKardex>> getTools() {
+        List<ToolDTOnoKardex> tools = toolService.getAllToolsNoKardex();
         return ResponseEntity.ok(tools);
     }
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTool(@PathVariable Long id) {
-        toolService.deleteToolById(id);
+    @PutMapping("/{id}/{rutUser}")
+    public ResponseEntity<Void> deleteTool(@PathVariable Long id,@PathVariable String rutUser) {
+        toolService.deleteToolById(id, rutUser);
         return ResponseEntity.noContent().build();
     }
 

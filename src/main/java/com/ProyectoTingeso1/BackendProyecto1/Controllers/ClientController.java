@@ -25,6 +25,11 @@ public class ClientController {
         List<Client> clients = clientService.getClients();
         return ResponseEntity.ok(clients);
     }
+    @GetMapping("/rutsClients")
+    public ResponseEntity<List<String>> listClientsRut() {
+        List<String> ruts = clientService.getAllRuts();
+        return ResponseEntity.ok(ruts);
+    }
     @PutMapping("/update")
     public ResponseEntity<Client> updateClient(@RequestBody Client client) {
         return ResponseEntity.ok(clientService.updateClient(client));
