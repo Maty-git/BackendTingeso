@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DebtService {
     @Autowired
@@ -14,5 +16,5 @@ public class DebtService {
     public Debt saveDebt(Debt debt) {
         return debtRepository.save(debt);
     }
-
+    public List<Debt> getAllDebt() {return debtRepository.findAll();}
 }

@@ -23,4 +23,5 @@ public interface LoanRepository extends JpaRepository<Loan, Long> {
             "JOIN l.tool t " +
             "WHERE l.status = com.ProyectoTingeso1.BackendProyecto1.Entities.Loan.LoanStatus.ACTIVE")
     List<LoanReturnDTO> getLoanSummary();
+    List<Loan> findByStatus(Loan.LoanStatus status);
 }

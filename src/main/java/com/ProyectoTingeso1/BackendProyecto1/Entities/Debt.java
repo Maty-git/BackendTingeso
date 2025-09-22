@@ -1,8 +1,15 @@
 package com.ProyectoTingeso1.BackendProyecto1.Entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "debts")
+@Data  // <-- genera getters, setters, toString, equals y hashCode
+@NoArgsConstructor
+@AllArgsConstructor
 public class Debt {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

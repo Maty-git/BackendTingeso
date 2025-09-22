@@ -38,7 +38,7 @@ public class Loan {
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime deliveryDate;
-    // with this hibernate capture a date when user was created
+
     @PrePersist
     protected void onCreate() {
         this.deliveryDate = LocalDateTime.now();
@@ -46,6 +46,8 @@ public class Loan {
 
     @Column(nullable = false)
     private String userRut;
+
+    private Boolean delay = false;
 
     //relaciones
     @ManyToOne(targetEntity =  Client.class)
