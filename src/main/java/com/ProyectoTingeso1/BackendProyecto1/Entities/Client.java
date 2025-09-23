@@ -13,10 +13,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Client {
-    public enum ClientStatus {
-        ACTIVE,
-        RESTRICTED
-    }
     //atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -54,7 +54,6 @@ public class Loan {
     @JoinColumn(name = "client_id",  nullable = false)
     private Client client;
 
-
     @ManyToOne(targetEntity = Tool.class)
     @JoinColumn(name = "tool_id", nullable = false)
     private Tool tool;

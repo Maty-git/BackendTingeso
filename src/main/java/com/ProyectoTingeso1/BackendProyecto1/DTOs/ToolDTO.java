@@ -7,5 +7,5 @@ public interface ToolDTO {
     int getRentDailyRate();
     int getLateFee();
     int getReplacementValue();
-    long getCount(); // cantidad agrupada
+    int getCount(); // cantidad agrupada
 }
