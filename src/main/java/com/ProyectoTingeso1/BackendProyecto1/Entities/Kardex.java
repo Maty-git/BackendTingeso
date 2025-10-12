@@ -18,7 +18,8 @@ public class Kardex {
         LOAN,
         RETURN,
         CANCELLATION,
-        ADJUSTMENT
+        REPAIR,
+        UPDATE
     }
     //atributos
     @Id

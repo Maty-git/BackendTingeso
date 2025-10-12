@@ -11,11 +11,9 @@ public interface LoanReturnDTO {
     LocalDateTime getReturnDateExpected();
     LocalDateTime getDeliveryDate();
     String getUserRut();
-
     // Client
     String getClientName();
     String getClientRut();
-
     // Tool
     String getToolName();
 }

@@ -38,5 +38,39 @@ public class ToolController {
         toolService.deleteToolById(id, rutUser);
         return ResponseEntity.noContent().build();
     }
+    @PutMapping("/repairDebt/{id}/{rutUser}")
+    public ResponseEntity<Void> repairTool(@PathVariable Long id,@PathVariable String rutUser) {
+        toolService.repairTool(id, rutUser);
+        return ResponseEntity.noContent().build();
+    }
+    @PutMapping("/repair/{id}/{rutUser}")
+    public ResponseEntity<Void> repairToolNoDebt(@PathVariable Long id,@PathVariable String rutUser) {
+        toolService.repairToolNoDebt(id, rutUser);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/for-repair")
+    public ResponseEntity<List<ToolDTOnoKardex>> getToolsForRepair() {
+        return  ResponseEntity.ok(toolService.getToolsForRepair());
+    }
+
+    @PutMapping("/update/{id}/{rutUser}")
+    public ResponseEntity<Void> updateTool(
+            @PathVariable Long id,
+            @PathVariable String rutUser,
+            @RequestBody Tool updatedTool) {
+        toolService.updateToolByIdAndGroup(id, rutUser, updatedTool);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{name}/{category}")
+    public ResponseEntity<ToolDTOnoKardex> getToolByNameAndCategory(
+            @PathVariable String name,
+            @PathVariable String category) {
+        ToolDTOnoKardex tool = toolService.getToolByNameAndCategory(name, category);
+        return ResponseEntity.ok(tool);
+    }
+
+
 
 }

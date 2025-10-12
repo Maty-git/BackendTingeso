@@ -18,7 +18,8 @@ public class Loan {
     public enum LoanStatus {
         ACTIVE,
         RETURNED,
-        UNPAID_DEBT
+        UNPAID_DEBT,
+        TOOL_BROKE
     }
     //atributos
     @Id

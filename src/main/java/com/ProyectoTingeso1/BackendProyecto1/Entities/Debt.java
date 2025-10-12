@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "debts")
 @Data  // <-- genera getters, setters, toString, equals y hashCode
@@ -18,6 +20,14 @@ public class Debt {
     private int amount;
     private String type; // LATE, DAMAGE, REPLACEMENT
     private boolean paid;
+
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime debtDate;
+    // with this hibernate capture a date when user was created
+    @PrePersist
+    protected void onCreate() {
+        this.debtDate = LocalDateTime.now();
+    }
 
     @ManyToOne(targetEntity = Loan.class)
     @JoinColumn(name = "loan_id", nullable = false)
