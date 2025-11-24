@@ -1,5 +1,5 @@
 # Imagen base con JDK
-FROM openjdk:21-jdk-slim
+FROM openjdk:21-jdk
 
 # Directorio de trabajo dentro del contenedor
 WORKDIR /app
