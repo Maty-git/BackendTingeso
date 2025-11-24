@@ -20,7 +20,7 @@ FROM eclipse-temurin:21-jdk
 WORKDIR /app
 
 # Copiar el jar generado dentro del contenedor
-COPY target/BackendProyecto1-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=builder /app/target/BackendProyecto1-0.0.1-SNAPSHOT.jar app.jar
 
 # Puerto en el que corre Spring Boot
 EXPOSE 8090
