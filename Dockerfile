@@ -1,3 +1,18 @@
+# ===============================
+# ETAPA 1: CONSTRUCCIÓN (Build)
+# ===============================
+# Usamos una imagen de Maven con Java 21 para compilar
+FROM maven:3.9-eclipse-temurin-21 AS builder
+
+# Establecemos el directorio de trabajo
+WORKDIR /app
+
+# Copiamos todo el código fuente al contenedor
+COPY . .
+
+# Ejecutamos Maven para construir el .jar (saltando los tests para ir más rápido)
+RUN mvn clean package -DskipTests
+
 # Imagen base con JDK
 FROM eclipse-temurin:21-jdk
 
