@@ -1,0 +1,16 @@
+# Usa la imagen base oficial de Jenkins
+FROM jenkins/jenkins:lts-jdk17
+
+# Cambia al usuario root para realizar la instalación
+USER root
+
+# Instala el cliente de Docker (docker.io)
+# apt-get update: Actualiza las listas de paquetes.
+# apt-get install -y: Instala el paquete docker.io.
+# rm -rf...: Limpia el caché para reducir el tamaño de la imagen.
+RUN apt-get update && \
+    apt-get install -y docker.io && \
+    rm -rf /var/lib/apt/lists/*
+
+# Vuelve al usuario 'jenkins' (recomendado por seguridad)
+USER jenkins

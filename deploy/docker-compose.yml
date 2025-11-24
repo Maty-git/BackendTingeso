@@ -124,20 +124,21 @@ services:
       - frontend-network
   # === JENKINS SERVER ===
   jenkins:
-    image: jenkins/jenkins:lts-jdk21
+    # 🚨 CAMBIO CLAVE: Usa 'build' en lugar de 'image'
+    build:
+      context: . 
+      dockerfile: Dockerfile.jenkins 
     container_name: jenkins
-    user: root # IMPORTANTE: Para tener permisos de usar Docker dentro de Jenkins
+    user: root # Necesario para interactuar con el socket
     privileged: true
     ports:
-      - "8081:8080" # Accederemos por el puerto 8081 para no chocar con otros
+      - "8081:8080"
       - "50000:50000"
     volumes:
       - jenkins_home:/var/jenkins_home
-      # Esto permite a Jenkins controlar el Docker de tu máquina anfitriona
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - backend-network
-      - frontend-network
 
 # === NETWORKS & VOLUMES ===
 networks:
