@@ -55,7 +55,7 @@ public interface DebtRepository extends JpaRepository<Debt, Long> {
             "FROM Debt d " +
             "JOIN d.client c " +
             "WHERE d.paid = false AND d.type = 'LATE' " +
-            "AND DATE(d.debtDate) BETWEEN DATE(:startDate) AND DATE(:endDate)")
+            "AND CAST(d.debtDate AS date) BETWEEN CAST(:startDate AS date) AND CAST(:endDate AS date)")
     List<ClientDTO> findClientsWithLateDebtsInDateRange(
             @Param("startDate") LocalDateTime startDate,
             @Param("endDate") LocalDateTime endDate);
