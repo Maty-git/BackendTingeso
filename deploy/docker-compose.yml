@@ -89,39 +89,6 @@ services:
     networks:
       - backend-network
 
-  # === FRONTEND INSTANCES (React) ===
-  frontend1:
-    image: matydocker1/frontend:latest
-    container_name: frontend1
-    networks:
-      - frontend-network
-
-  frontend2:
-    image: matydocker1/frontend:latest
-    container_name: frontend2
-    networks:
-      - frontend-network
-
-  frontend3:
-    image: matydocker1/frontend:latest
-    container_name: frontend3
-    networks:
-      - frontend-network
-
-  # === FRONTEND LOAD BALANCER (Nginx) ===
-  nginx-frontend:
-    image: nginx:latest
-    container_name: nginx-frontend
-    ports:
-      - "8070:80"
-    volumes:
-      - ./nginx-frontend.conf:/etc/nginx/nginx.conf:ro
-    depends_on:
-      - frontend1
-      - frontend2
-      - frontend3
-    networks:
-      - frontend-network
   # === JENKINS SERVER ===
   jenkins:
     # Usamos la imagen base o una pre-construida, ya no construimos aquí

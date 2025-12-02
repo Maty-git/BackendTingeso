@@ -21,7 +21,8 @@ public class LoanSchedulerService {
     private final DebtRepository debtRepository;
     private final ClientRepository clientRepository;
 
-    public LoanSchedulerService(LoanRepository loanRepository, DebtRepository debtRepository, ClientRepository clientRepository) {
+    public LoanSchedulerService(LoanRepository loanRepository, DebtRepository debtRepository,
+            ClientRepository clientRepository) {
         this.loanRepository = loanRepository;
         this.debtRepository = debtRepository;
         this.clientRepository = clientRepository;
@@ -30,7 +31,7 @@ public class LoanSchedulerService {
     /**
      * Ejecuta todos los días a las 12:00 del día
      */
-    @Scheduled(cron = "0 30 17 * * *")
+    @Scheduled(cron = "0 50 23 * * *")
     @Transactional
     public void actualizarPrestamosAtrasados() {
         List<Loan> activs = loanRepository.findByStatus(Loan.LoanStatus.ACTIVE);
