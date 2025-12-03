@@ -26,7 +26,8 @@ pipeline {
                     echo "--> Ejecutando pruebas unitarias..."
                     // Aseguramos que el wrapper tenga permisos de ejecución
                     sh "chmod +x mvnw"
-                    sh "./mvnw test"
+                    // Limpiamos target para asegurar recompilación (por si se subieron .class al repo)
+                    sh "./mvnw clean test"
                 }
             }
         }
