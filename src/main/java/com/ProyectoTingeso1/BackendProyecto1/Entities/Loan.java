@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
 @Entity
 @Table(name = "loans")
 @Data
@@ -21,7 +20,8 @@ public class Loan {
         UNPAID_DEBT,
         TOOL_BROKE
     }
-    //atributos
+
+    // atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
@@ -33,6 +33,8 @@ public class Loan {
     private LocalDateTime realReturnDate;
 
     private int quantity;
+
+    private int price;
 
     @Enumerated(EnumType.STRING)
     private LoanStatus status;
@@ -50,9 +52,9 @@ public class Loan {
 
     private Boolean delay = false;
 
-    //relaciones
-    @ManyToOne(targetEntity =  Client.class)
-    @JoinColumn(name = "client_id",  nullable = false)
+    // relaciones
+    @ManyToOne(targetEntity = Client.class)
+    @JoinColumn(name = "client_id", nullable = false)
     private Client client;
 
     @ManyToOne(targetEntity = Tool.class)

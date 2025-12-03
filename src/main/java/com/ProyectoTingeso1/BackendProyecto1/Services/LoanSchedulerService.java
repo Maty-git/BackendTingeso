@@ -30,7 +30,7 @@ public class LoanSchedulerService {
     /**
      * Ejecuta todos los días a las 12:00 del día
      */
-    @Scheduled(cron = "0 45 12 * * *")
+    @Scheduled(cron = "0 30 17 * * *")
     @Transactional
     public void actualizarPrestamosAtrasados() {
         List<Loan> activs = loanRepository.findByStatus(Loan.LoanStatus.ACTIVE);

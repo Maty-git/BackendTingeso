@@ -51,8 +51,7 @@ public class LoanService {
         // 🚨 Validación: no más de una unidad de la misma herramienta
         Tool tool = toolService.getToolById(loanDTO.getToolId());
         List<Loan> similarLoans = loanRepository.findActiveLoansByClientAndToolAttributes(
-                client, tool.getName(), tool.getCategory()
-        );
+                client, tool.getName(), tool.getCategory());
         if (!similarLoans.isEmpty()) {
             return false;
         }
@@ -65,6 +64,7 @@ public class LoanService {
         newLoan.setClient(client);
         newLoan.setUserRut(user);
         newLoan.setTool(tool);
+        newLoan.setPrice(loanDTO.getPrice());
 
         // Ahora registramos el movimiento en el kardex
         Kardex k = new Kardex();
@@ -74,7 +74,7 @@ public class LoanService {
         k.setTool(tool);
 
         kardexService.saveKardex(k);
-        //cambiamos el estado a en prestamo de la herramienta
+        // cambiamos el estado a en prestamo de la herramienta
         toolService.setToolToLoaned(loanDTO.getToolId());
 
         loanRepository.save(newLoan);
@@ -84,6 +84,7 @@ public class LoanService {
     public List<LoanReturnDTO> getAllLoans() {
         return loanRepository.getLoanSummary();
     }
+
     // para cuando no tiene daños
     @Transactional
     public boolean returnLoan(Long id, String userRut, boolean damage) {
@@ -115,10 +116,10 @@ public class LoanService {
         // 5. Actualizar stock de la herramienta
         // si tiene daños manda a revisar
         Tool tool = loan.getTool();
-        if(damage){
+        if (damage) {
             tool.setState(Tool.ToolState.UNDER_REPAIR);
             loan.setStatus(Loan.LoanStatus.UNPAID_DEBT);
-        }else{
+        } else {
             tool.setState(Tool.ToolState.AVAILABLE);
             loan.setStatus(Loan.LoanStatus.RETURNED);
         }
@@ -138,8 +139,6 @@ public class LoanService {
         return true;
     }
 
-
-
     public LoanReturnDTO getLoanReturnDTOById(Long id) {
         return loanRepository.findActiveLoanById(id);
     }
@@ -156,7 +155,7 @@ public class LoanService {
         return loanRepository.findMostLoanedToolsByDateRange(start, end);
     }
 
-    public List<ToolRankingDTO>  getMostLoanedTools() {
+    public List<ToolRankingDTO> getMostLoanedTools() {
         return loanRepository.findMostLoanedTools();
     }
 }

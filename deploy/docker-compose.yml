@@ -42,9 +42,9 @@ services:
     image: matydocker1/backend:latest
     container_name: backend1
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/tingeso
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=4tech01556
+      - SPRING_DATASOURCE_URL=${DB_URL}
+      - SPRING_DATASOURCE_USERNAME=${DB_USERNAME}
+      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
     depends_on:
       - postgres
     networks:
@@ -54,9 +54,9 @@ services:
     image: matydocker1/backend:latest
     container_name: backend2
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/tingeso
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=4tech01556
+      - SPRING_DATASOURCE_URL=${DB_URL}
+      - SPRING_DATASOURCE_USERNAME=${DB_USERNAME}
+      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
     depends_on:
       - postgres
     networks:
@@ -66,9 +66,9 @@ services:
     image: matydocker1/backend:latest
     container_name: backend3
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/tingeso
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=4tech01556
+      - SPRING_DATASOURCE_URL=${DB_URL}
+      - SPRING_DATASOURCE_USERNAME=${DB_USERNAME}
+      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
     depends_on:
       - postgres
     networks:
@@ -124,10 +124,8 @@ services:
       - frontend-network
   # === JENKINS SERVER ===
   jenkins:
-    # 🚨 CAMBIO CLAVE: Usa 'build' en lugar de 'image'
-    build:
-      context: .
-      dockerfile: Dockerfile.jenkins
+    # Usamos la imagen base o una pre-construida, ya no construimos aquí
+    image: jenkins/jenkins:lts-jdk17
     container_name: jenkins
     user: root # Necesario para interactuar con el socket
     privileged: true
