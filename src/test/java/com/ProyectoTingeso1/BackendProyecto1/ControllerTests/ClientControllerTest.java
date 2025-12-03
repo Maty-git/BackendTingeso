@@ -55,8 +55,8 @@ class ClientControllerTest {
 
         // When & Then
         mockMvc.perform(post("/api/clients/save")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(client)))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(client)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Juan Pérez"))
                 .andExpect(jsonPath("$.rut").value("12345678-9"));
@@ -67,12 +67,14 @@ class ClientControllerTest {
     @Test
     void whenListClients_thenReturnListOfClients() throws Exception {
         // Given
-        Client client2 = new Client();
-        client2.setId(2L);
-        client2.setName("María González");
-        client2.setRut("98765432-1");
+        com.ProyectoTingeso1.BackendProyecto1.DTOs.ClientResponseDTO clientDTO1 = new com.ProyectoTingeso1.BackendProyecto1.DTOs.ClientResponseDTO(
+                "12345678-9", "Juan Pérez", "juan@example.com", "+56912345678", "ACTIVE");
 
-        ArrayList<Client> clients = new ArrayList<>(Arrays.asList(client, client2));
+        com.ProyectoTingeso1.BackendProyecto1.DTOs.ClientResponseDTO clientDTO2 = new com.ProyectoTingeso1.BackendProyecto1.DTOs.ClientResponseDTO(
+                "98765432-1", "María González", "maria@example.com", "+56987654321", "RESTRICTED");
+
+        List<com.ProyectoTingeso1.BackendProyecto1.DTOs.ClientResponseDTO> clients = Arrays.asList(clientDTO1,
+                clientDTO2);
         when(clientService.getClients()).thenReturn(clients);
 
         // When & Then
@@ -109,8 +111,8 @@ class ClientControllerTest {
 
         // When & Then
         mockMvc.perform(put("/api/clients/update")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(client)))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(client)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Juan Pérez Actualizado"));
 
@@ -145,4 +147,3 @@ class ClientControllerTest {
         verify(clientService, times(1)).deleteClient(1L);
     }
 }
-

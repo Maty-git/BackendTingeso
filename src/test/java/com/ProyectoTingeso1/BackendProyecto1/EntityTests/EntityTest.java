@@ -37,12 +37,12 @@ class EntityTest {
     @Test
     void testClientEqualsAndHashCode() {
         // Given
-        Client client1 = new Client(1L, "Juan Pérez", "12345678-9", "+56912345678", 
-                                     "juan@example.com", "ACTIVE", null, null);
-        Client client2 = new Client(1L, "Juan Pérez", "12345678-9", "+56912345678", 
-                                     "juan@example.com", "ACTIVE", null, null);
-        Client client3 = new Client(2L, "María González", "98765432-1", "+56987654321", 
-                                     "maria@example.com", "RESTRICTED", null, null);
+        Client client1 = new Client(1L, "Juan Pérez", "12345678-9", "+56912345678",
+                "juan@example.com", "ACTIVE", null, null);
+        Client client2 = new Client(1L, "Juan Pérez", "12345678-9", "+56912345678",
+                "juan@example.com", "ACTIVE", null, null);
+        Client client3 = new Client(2L, "María González", "98765432-1", "+56987654321",
+                "maria@example.com", "RESTRICTED", null, null);
 
         // Then
         assertThat(client1).isEqualTo(client2);
@@ -171,10 +171,10 @@ class EntityTest {
         LocalDateTime now = LocalDateTime.now();
         Client client = new Client();
         Tool tool = new Tool();
-        
-        Loan loan = new Loan(1L, now.plusDays(7), now.plusDays(7), 1, 
-                            Loan.LoanStatus.RETURNED, now, "11111111-1", false, 
-                            client, tool, new ArrayList<>());
+
+        Loan loan = new Loan(1L, now.plusDays(7), now.plusDays(7), 1, 1000,
+                Loan.LoanStatus.RETURNED, now, "11111111-1", false,
+                client, tool, new ArrayList<>());
 
         // Then
         assertThat(loan.getId()).isEqualTo(1L);
@@ -186,9 +186,9 @@ class EntityTest {
     @Test
     void testToolWithAllArgsConstructor() {
         // Given
-        Tool tool = new Tool(1L, "Martillo", Tool.ToolCategory.MANUAL, 
-                            Tool.ToolState.AVAILABLE, 1, 1000, 500, 5000, 1000, 
-                            false, new ArrayList<>(), new ArrayList<>());
+        Tool tool = new Tool(1L, "Martillo", Tool.ToolCategory.MANUAL,
+                Tool.ToolState.AVAILABLE, 1, 1000, 500, 5000, 1000,
+                false, new ArrayList<>(), new ArrayList<>());
 
         // Then
         assertThat(tool.getId()).isEqualTo(1L);
@@ -225,4 +225,3 @@ class EntityTest {
         assertThat(loan.toString()).isNotNull();
     }
 }
-

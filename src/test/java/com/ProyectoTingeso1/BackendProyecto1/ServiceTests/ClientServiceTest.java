@@ -72,11 +72,12 @@ class ClientServiceTest {
         when(clientRepository.findAll()).thenReturn(clients);
 
         // When
-        ArrayList<Client> result = clientService.getClients();
+        List<com.ProyectoTingeso1.BackendProyecto1.DTOs.ClientResponseDTO> result = clientService.getClients();
 
         // Then
         assertThat(result).isNotNull();
         assertThat(result).hasSize(2);
+        assertThat(result.get(0).getName()).isEqualTo("Juan Pérez");
         verify(clientRepository, times(1)).findAll();
     }
 
@@ -164,4 +165,3 @@ class ClientServiceTest {
         verify(clientRepository, times(1)).findByRut("11111111-1");
     }
 }
-
