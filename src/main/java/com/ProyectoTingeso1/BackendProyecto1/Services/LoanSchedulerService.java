@@ -31,9 +31,10 @@ public class LoanSchedulerService {
     /**
      * Ejecuta todos los días a las 12:00 del día
      */
-    @Scheduled(cron = "0 25 0 * * *")
+    @Scheduled(cron = "0 43 1 * * *", zone = "America/Santiago")
     @Transactional
     public void actualizarPrestamosAtrasados() {
+        System.out.println("--- EJECUTANDO SCHEDULER DE PRESTAMOS: " + java.time.LocalDateTime.now() + " ---");
         List<Loan> activs = loanRepository.findByStatus(Loan.LoanStatus.ACTIVE);
         LocalDate today = LocalDate.now();
 
