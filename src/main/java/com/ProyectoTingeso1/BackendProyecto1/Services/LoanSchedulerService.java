@@ -31,7 +31,7 @@ public class LoanSchedulerService {
     /**
      * Ejecuta todos los días a las 12:00 del día
      */
-    @Scheduled(cron = "0 43 1 * * *", zone = "America/Santiago")
+    @Scheduled(cron = "0 55 1 * * *", zone = "America/Santiago")
     @Transactional
     public void actualizarPrestamosAtrasados() {
         System.out.println("--- EJECUTANDO SCHEDULER DE PRESTAMOS: " + java.time.LocalDateTime.now() + " ---");
