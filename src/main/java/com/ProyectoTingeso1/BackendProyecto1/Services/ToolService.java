@@ -94,7 +94,7 @@ public class ToolService {
             debt.setLoan(loan);
             debt.setClient(loan.getClient());
             debt.setType("TOOL_BROKE");
-            debt.setAmount(tool.getReplacementValue()); // 💰 usar valor de reposición
+            debt.setAmount(tool.getReplacementValue());
             debt.setPaid(false);
             debtRepository.save(debt);
 
@@ -164,7 +164,6 @@ public class ToolService {
 
         toolRepository.save(tool);
 
-        // ⚠️ Aquí NO se genera deuda, y no se modifica el estado del cliente
     }
 
     public List<ToolDTOnoKardex> getToolsForRepair() {

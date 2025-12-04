@@ -28,9 +28,7 @@ public class LoanSchedulerService {
         this.clientRepository = clientRepository;
     }
 
-    /**
-     * Ejecuta todos los días a las 12:00 del día
-     */
+
     @Scheduled(cron = "0 55 1 * * *", zone = "America/Santiago")
     @Transactional
     public void actualizarPrestamosAtrasados() {
@@ -41,7 +39,7 @@ public class LoanSchedulerService {
         for (Loan loan : activs) {
             LocalDate agreedDate = loan.getReturnDateExpected().toLocalDate();
 
-            // Verificamos solo AÑO-MES-DÍA
+
             if (agreedDate.isBefore(today)) {
                 loan.setDelay(true);
 

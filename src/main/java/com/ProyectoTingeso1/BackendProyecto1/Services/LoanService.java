@@ -37,18 +37,18 @@ public class LoanService {
     public boolean saveLoan(LoanRequestDTO loanDTO) {
         Client client = clientService.getClientByRut(loanDTO.getClientRut());
 
-        // 🚨 Validación: cliente restringido
+
         if ("RESTRICTED".equals(client.getStatus())) {
             return false;
         }
 
-        // 🚨 Validación: máximo 5 préstamos activos
+
         long prestamosActivos = loanRepository.countActiveLoansByClient(client);
         if (prestamosActivos >= 5) {
             return false;
         }
 
-        // 🚨 Validación: no más de una unidad de la misma herramienta
+
         Tool tool = toolService.getToolById(loanDTO.getToolId());
         List<Loan> similarLoans = loanRepository.findActiveLoansByClientAndToolAttributes(
                 client, tool.getName(), tool.getCategory());
@@ -66,7 +66,7 @@ public class LoanService {
         newLoan.setTool(tool);
         newLoan.setPrice(loanDTO.getPrice());
 
-        // Ahora registramos el movimiento en el kardex
+
         Kardex k = new Kardex();
         k.setMovementType(Kardex.MovementType.LOAN); // CREACIÓN
         k.setQuantity(1);
@@ -74,7 +74,7 @@ public class LoanService {
         k.setTool(tool);
 
         kardexService.saveKardex(k);
-        // cambiamos el estado a en prestamo de la herramienta
+
         toolService.setToolToLoaned(loanDTO.getToolId());
 
         loanRepository.save(newLoan);
