@@ -1,6 +1,5 @@
 # Guía de Pruebas Unitarias - BackendProyecto1
 
-Esta guía te ayudará a ejecutar y comprender las pruebas unitarias del proyecto BackendProyecto1.
 
 ## 📋 Contenido
 
